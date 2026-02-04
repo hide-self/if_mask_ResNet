@@ -8,7 +8,7 @@
 
 我们使用kaggle的免费GPU资源进行训练，上传了数据集，运行后，获得了`best_model.pth`，并且输出如下训练过程图(部分截图)
 
-![77019134233](md_img\1770191342333.png)
+![77019134233](md_img/1770191342333.png)
 
 
 
@@ -22,7 +22,7 @@ kaggle的notebook地址（已公开）:https://www.kaggle.com/code/hideself/frui
 
 我们使用kaggle的免费GPU资源进行训练，上传了数据集和刚刚获得的模型参数`best_model.pth`，验证结果如下
 
-![77019134233](md_img\1770191520132.png)
+![77019134233](md_img/1770191520132.png)
 
 
 
@@ -59,21 +59,21 @@ predicted_class, confidence = predict_single_image(model, './image_for_test/has_
 
 ### 单张图预测1：有口罩的
 
-![](md_img\has_mask.jpg)
+![](md_img/has_mask.jpg)
 
 结果截图：
 
-![77019201273](md_img\1770192012735.png)
+![77019201273](md_img/1770192012735.png)
 
 
 
 ### 单张图预测2：无口罩的
 
-![](D:\if_mask_ResNet\md_img\has_no_mask.jpg)
+![](D:/if_mask_ResNet/md_img/has_no_mask.jpg)
 
 结果截图：
 
-![77019217062](md_img\1770192170626.png)
+![77019217062](md_img/1770192170626.png)
 
 
 
