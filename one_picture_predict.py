@@ -49,7 +49,7 @@ if __name__=='__main__':
         )
     ])
 
-    predicted_class, confidence = predict_single_image(model, './image_for_test/test_grape.png', test_transform, device)
+    predicted_class, confidence = predict_single_image(model, './image_for_test/has_no_mask.jfif', test_transform, device)
 
     classes=getAllClasses()
     print(f'预测类别: {classes[predicted_class]}, 置信度: {confidence:.4f}')

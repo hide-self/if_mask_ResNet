@@ -70,7 +70,11 @@ class ResNet18(nn.Module):
         self.b3=nn.Sequential(
             nn.AdaptiveAvgPool2d((1,1)),
             nn.Flatten(),
-            nn.Linear(in_features=512,out_features=num_classes)
+            nn.Dropout(0.5),  # 添加Dropout
+            nn.Linear(in_features=512, out_features=256),
+            nn.ReLU(),
+            nn.Dropout(0.5 / 2),    # 添加Dropout
+            nn.Linear(in_features=256, out_features=num_classes)    # 再添加一层全连接层
         )
 
         # 权重初始化

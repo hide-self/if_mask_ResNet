@@ -66,8 +66,8 @@ def test_epoch(model,test_loader,criterion,device):
 def whole_train_test_process():
     """训练与验证的完整过程"""
     batch_size=32
-    learning_rate=0.001
-    epochs=20
+    learning_rate=0.01  # 学习率提高
+    epochs=50       # 增加训练轮次到50次
     device=torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # 数据加载器
@@ -81,20 +81,21 @@ def whole_train_test_process():
     # 损失函数
     criterion=nn.CrossEntropyLoss()
 
-    # GoogLeNet优化器需要用Adam
-    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-
-    # # 优化器(VGG参数比较特殊，优化器需要在SGD、Adam之间调整、浅层神经网络用Adam、深层神经网络用SGD)
-    # optimizer = torch.optim.SGD(
-    #     model.parameters(),
-    #     lr=learning_rate,  # 增大学习率
-    #     momentum=0.9,  # 添加动量
-    #     weight_decay=5e-4  # 权重衰减
-    # )
+    # 使用SGD + 动量 + 权重衰减（ResNet通常效果更好）
+    optimizer = torch.optim.SGD(
+        model.parameters(),
+        lr=learning_rate,
+        momentum=0.9,
+        weight_decay=1e-4
+    )
 
     # 网络比较深，学习率下降的话效果将会不明显
-    # 学习率调度器(每7轮,lr*=0.1,使得在后面的训练中更加能够接近最佳结果)
-    scheduler=torch.optim.lr_scheduler.StepLR(optimizer,step_size=7,gamma=0.1)
+    # 改用余弦退火学习率调度（让学习率按照余弦函数cosx的[0,pai]曲线减少）
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+        optimizer,      # 优化器
+        T_max=epochs,   # 最大轮次
+        eta_min=1e-5    # 最小值
+    )
 
     # 记录训练过程
     train_losses=[]
@@ -104,7 +105,7 @@ def whole_train_test_process():
     best_test_acc=100.*0.0
     sum_time_use=0
 
-    print('开始训练GoogLeNet...')
+    print('开始训练ResNet18...')
 
     for epoch in range(epochs):
         since = time.time()

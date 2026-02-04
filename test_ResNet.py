@@ -41,7 +41,7 @@ def evaluate_final_model(model,test_loader,device):
 
 if __name__=='__main__':
     # 加载模型
-    model=GoogLeNet(num_classes=2)
+    model=ResNet18(num_classes=2)
     device=torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model.load_state_dict(torch.load('./best_model.pth',map_location=device))
     model=model.to(device)
