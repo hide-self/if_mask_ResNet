@@ -69,7 +69,7 @@ predicted_class, confidence = predict_single_image(model, './image_for_test/has_
 
 ### 单张图预测2：无口罩的
 
-![](D:/if_mask_ResNet/md_img/has_no_mask.jpg)
+![](md_img/has_no_mask.jpg)
 
 结果截图：
 
